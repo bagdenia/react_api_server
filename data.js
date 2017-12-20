@@ -33,6 +33,8 @@ module.exports = {
       alt: 'hi kitty'
     },
     meta: {
+      name: 'Senya',
+      likes: 0,
       dateCreated: '2017-09-07'
     },
     text: 'Nice day for'
