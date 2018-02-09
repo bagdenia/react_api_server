@@ -1,10 +1,12 @@
 var express = require('express');
 var application = express();
+const bodyParser = require('body-parser');
 
 var cors = require('cors');
 
 var items = require('./data').items;
 
+application.use(bodyParser.json());
 application.use(cors());
 
 application.get('/', function (req, res) {
@@ -22,6 +24,15 @@ application.post('/', function (req, res) {
     item.meta.likes += 1;
     res.send(item);
   });
+
+application.put('/posts/:id/edit', function (req, res) {
+  const updatedPost = req.body;
+  var item = items[req.body.id - 1];
+  item.meta.name = updatedPost.author;
+  item.meta.dateCreated = updatedPost.createdAt;
+  item.text = updatedPost.text;
+  res.send(item);
+});
  
 application.listen(5001, function() {
   console.log('Server on 5001')
